@@ -20,7 +20,7 @@ The sticky note can't help you. The actual words are gone.
 
 **ConverMem is the airplane flight data recorder (black box stenographer):**
 - **Lossless & Verbatim:** Captures the full dialog turn-by-turn with zero truncation.
-- **Cross-Platform Support:** Works seamlessly across Antigravity, Claude Code, VS Code, Cursor, Codex, and OpenCode.
+- **Cross-Platform Support:** Works seamlessly across Antigravity, Claude Code, VS Code, Cursor, Codex, OpenCode, etc.
 - **Side Question & `/btw` Timeline Weaving:** Discovers transient side questions and weaves them chronologically back into the main transcript at their exact timestamps.
 - **Multi-Format Output Connectors:** Exports to local Markdown, Word (`.docx`), GitHub, Google Drive/Docs, NotebookLM, Notion, and Canva.
 - **Noise-Free:** Strips out ugly internal system tags, token counters, and raw terminal stdout.

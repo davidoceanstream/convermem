@@ -1,0 +1,2 @@
+[console_scripts]
+convermem = convermem.cli:main

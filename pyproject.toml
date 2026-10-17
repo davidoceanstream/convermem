@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "convermem"
+version = "0.1.0"
+description = "Zero-Loss AI Chat History & Cross-Conversation Scribe"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Antigravity & David", email = "open-source@antigravity.ai"}]
+dependencies = [
+    "click>=8.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
+
+[project.scripts]
+convermem = "convermem.cli:main"

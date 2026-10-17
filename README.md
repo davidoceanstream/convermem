@@ -1,101 +1,138 @@
-# 📜 ConverMem: Zero-Loss AI Chat History & Cross-Conversation Scribe
+<div align="center">
+
+![ConverMem — Zero-Loss AI Chat Scribe & Cross-Session Memory Engine](./assets/hero-banner.png)
+
+# 📜 ConverMem
+### Zero-Loss AI Chat History & Cross-Conversation Memory Engine
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Tests](https://img.shields.io/badge/tests-7%2F7%20passing-brightgreen.svg)]()
+[![Privacy Shield](https://img.shields.io/badge/Privacy%20Shield-DavidAgentCrew%20Active-emerald.svg)]()
 
-> **Turn fragmented, disappearing AI chat sessions into searchable, beautifully formatted Markdown archives with a single command.**
+<p align="center">
+  <b>Turn disappearing AI chat sessions into permanent, beautifully formatted knowledge archives.</b>
+</p>
+
+</div>
 
 ---
 
-## 💡 What is ConverMem? (The Airplane Flight Recorder Analogy)
+## 🧒 What is ConverMem? (The 3rd-Grade Explanation)
+
+Think of ConverMem as a **universal memory recorder for all your AI helpers**:
+- ⚡ It works as a **Slash Command Skill (`/convermem`)** inside your AI chat.
+- 🧠 It works as a **Smart Agent Plugin** that organizes your notes.
+- 💻 It works as a **One-Line Command Tool (CLI)** in your computer terminal.
+
+> **Like telling an 8-year-old:**  
+> When you chat with AI helpers today, every time you close the window, they forget everything you talked about.  
+> **ConverMem is like a magical recorder notebook.** It listens to your conversations across Antigravity, Claude Code, Codex, Cursor, VS Code, OpenCode, **etc.** It writes down every single word you and the AI said together (verbatim—zero cutting or guessing), secretly hides your private passwords with magic ink so nobody steals them, and neatly packs your story into clean readable files, Google Drive, or Notion!
+
+---
+
+## ⚡ 10-Second Quickstart
+
+### 1. Install
+```bash
+git clone https://github.com/davidoceanstream/convermem.git
+cd convermem
+pip install -e .
+```
+
+### 2. Run in Terminal (CLI)
+```bash
+# Export all chats about a specific topic into clean Markdown
+convermem export --topic "authentication" --out "./my_notes"
+
+# Export conversations from the last 7 days
+convermem export --days 7 --out "./weekly_logs"
+
+# Scan all AI sessions discovered on your computer
+convermem scan
+```
+
+### 3. Run in AI Chat (Slash Command)
+Type directly inside your assistant chat:
+```text
+/convermem --topic "database architecture" --out "./docs/db_chat"
+```
+Or simply ask in natural language:
+> *"Export our conversation about Stripe payments to ./docs/billing"*
+
+---
+
+## 🌟 Core Superpowers
+
+### 🔌 1. Universal Multi-Platform Adapters (Open-Ended)
+ConverMem automatically discovers and traverses conversation logs across all your AI assistants:
+
+| Platform / Assistant | What It Reads |
+| :--- | :--- |
+| **Antigravity** | `~/.gemini/antigravity/brain/` (`transcript_full.jsonl`) |
+| **Claude Code** | `~/.claude/projects/` (`<session-id>.jsonl`) |
+| **Codex CLI (OpenAI)** | `~/.codex/sessions/` / Rollout logs |
+| **Cursor** | `AppData/Roaming/Cursor/User/globalStorage/` |
+| **VS Code (Cline / Roo / Copilot)** | `AppData/Roaming/Code/User/globalStorage/` |
+| **OpenCode** | `~/.local/share/opencode/` |
+| **... and more (etc.)** | Easily extensible adapter architecture for future AI tools |
+
+### 🛡️ 2. DavidAgentCrew Privacy Shield
+Never worry about leaking secrets to public GitHub repos. ConverMem automatically scans and sanitizes:
+- **API Keys:** OpenAI, Anthropic, GitHub, AWS, Stripe
+- **Auth Tokens:** Bearer tokens, session cookies, passwords
+- **PII:** Phone numbers (international & local) and personal email addresses
+- *Secrets are masked to `[REDACTED_API_KEY]`, keeping your team and code 100% safe.*
+
+### 🧵 3. Timeline Weaving for `/btw` and Side Questions
+Coding assistants often support floating modal questions or `/btw` sub-threads so users don't break the agent's flow. ConverMem finds these transient side questions and weaves them chronologically back into the main conversation at their exact timestamps.
+
+### 🚀 4. Multi-Destination Connectors
+Go beyond saving flat files on your hard drive:
+- 🐙 **GitHub:** Auto-commit & push to repositories or generate GitHub Wiki pages.
+- 📓 **Notion:** Synchronize formatted documents into Notion Databases and team workspaces.
+- ☁️ **Google Drive & Docs:** Auto-upload via Google Service Account or Google Drive for Desktop.
+- 🧠 **NotebookLM:** Send transcripts to generate Audio Overview podcasts, mind maps, and flashcards.
+- 🎨 **Canva:** Extract key takeaways into presentation slides and visual infographics.
+
+---
+
+## 📖 CLI Reference Cheat Sheet
+
+| Option | Flag | Description | Default |
+| :--- | :--- | :--- | :--- |
+| **Topic** | `--topic <text>` | Comma-separated keywords to filter dialogue | `None` (All) |
+| **Days** | `--days <N>` | Include turns from the past N days | `None` |
+| **Last Sessions** | `--last <N>` | Limit scan to the N most recent sessions | `None` |
+| **Output Path** | `--out <path>` | Target folder for exported Markdown | `./convermem_export` |
+| **Raw Mode** | `--no-redact` | Disable Privacy Shield (use with caution) | `False` (Redacted) |
+
+---
+
+<details>
+<summary><b>💡 Deep Dive: Why Lossless Verbatim Recording Beats Lossy Summaries</b></summary>
+<br>
+
+### The Airplane Black Box Analogy
 
 Imagine pair-programming with an expert colleague for weeks, but every morning they get amnesia. 
 
 Existing solutions like `claude-mem` act like **sticky post-it notes**: they jot down a short, lossy summary (*"Likes dark mode, uses PostgreSQL"*). But if you ever want to revisit:
 - *Why did we choose Architecture A over B?*
 - *What was the exact prompt formulation that fixed the bug?*
-- *What were the verbatim pros and cons we discussed last Tuesday?*
+- *What were the verbatim pros and cons we debated last Tuesday?*
 
-The sticky note can't help you. The actual words are gone.
+The sticky note can't help you. The actual words were thrown away.
 
 **ConverMem is the airplane flight data recorder (black box stenographer):**
-- **Lossless & Verbatim:** Captures the full dialog turn-by-turn with zero truncation.
-- **Cross-Platform Support:** Works seamlessly across Antigravity, Claude Code, VS Code, Cursor, Codex, OpenCode, etc.
-- **Side Question & `/btw` Timeline Weaving:** Discovers transient side questions and weaves them chronologically back into the main transcript at their exact timestamps.
-- **Multi-Format Output Connectors:** Exports to local Markdown, Word (`.docx`), GitHub, Google Drive/Docs, NotebookLM, Notion, and Canva.
-- **Noise-Free:** Strips out ugly internal system tags, token counters, and raw terminal stdout.
-- **Built-in Privacy Shield:** Automatically detects and redacts API keys, passwords, bearer tokens, and phone numbers before exporting so your private data never leaks to public repositories.
+1. **Zero Loss:** Every word you and the AI exchanged is preserved verbatim.
+2. **Cross-Session Traversal:** Connects past sessions across weeks into one chronological narrative.
+3. **Noise-Free Formatting:** Strips out ugly JSON system tags and raw terminal logs, leaving only human-readable discussion.
+4. **Structured Chapters:** Automatically splits massive conversations into chapters of 50 turns with an interactive `README.md` navigation table.
 
----
-
-## 🔌 Universal Multi-Platform Support
-
-ConverMem automatically discovers session logs across major AI coding assistants:
-
-| Platform / Assistant | Default Storage Root | Format Parsed |
-| :--- | :--- | :--- |
-| **Antigravity** | `~/.gemini/antigravity/brain/` | `transcript_full.jsonl` / `transcript.jsonl` |
-| **Claude Code** | `~/.claude/projects/` | `<session-id>.jsonl` |
-| **VS Code (Cline / Roo / Continue)** | `AppData/Roaming/Code/User/globalStorage/` | `api_conversation_history.json` |
-| **Cursor** | `AppData/Roaming/Cursor/User/globalStorage/` | `state.vscdb` / Chat logs |
-| **OpenCode** | `~/.local/share/opencode/` | Session JSON / SQLite logs |
-| **Codex CLI** | `~/.codex/sessions/` | Rollout `.jsonl` |
-
----
-
-## ⚡ Quickstart
-
-### 1. Installation
-```bash
-git clone https://github.com/your-username/convermem.git
-cd convermem
-pip install -e .
-```
-
-### 2. Basic Usage (CLI)
-
-```bash
-# Export conversations about a specific topic across all sessions
-convermem export --topic "authentication,jwt" --out "./docs/auth_history"
-
-# Export conversations from the last 7 days
-convermem export --days 7 --out "./weekly_logs"
-
-# Export the 3 most recent sessions
-convermem export --last 3 --out "./recent_notes"
-```
-
-### 3. In AI Chat Environments (Slash Command)
-Type directly in your assistant chat:
-```text
-/convermem --topic "shopping cart" --out "./docs/cart_logs"
-```
-Or simply use natural language:
-> *"Export our discussion on database migrations to ./docs/db_notes"*
-
----
-
-## 🚀 Knowledge-to-Media Connectors
-
-ConverMem goes beyond saving plain files—it turns conversations into living knowledge:
-
-1. 🐙 **GitHub:** Automatically commits and pushes logs to Git repos or updates GitHub Wiki pages.
-2. ☁️ **Google Drive & Docs:** Synchronizes formatted documents to Google Drive via Service Account or Desktop sync.
-3. 📓 **Notion:** Exports formatted pages with callout boxes and code blocks into Notion databases.
-4. 🧠 **NotebookLM:** Generates Audio Overview podcasts, mind maps, quizzes, and study guides.
-5. 🎨 **Canva:** Extracts key takeaways into presentation slide templates and infographics.
-
----
-
-## 🛡️ Built-in Privacy Shield
-ConverMem automatically protects your confidential credentials:
-- API Keys (OpenAI, GitHub, AWS, Stripe)
-- Bearer Auth Tokens
-- Personal phone numbers & email addresses
-
-Secrets are masked to `[REDACTED_API_KEY]`, ensuring your exported markdown files are 100% safe to commit to public Git repositories.
+</details>
 
 ---
 
 ## 📄 License
-MIT © 2026 ConverMem Contributors.
+MIT © 2026 ConverMem Contributors. Built with precision for developers and creators worldwide.

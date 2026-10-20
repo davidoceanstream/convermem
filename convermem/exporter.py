@@ -10,9 +10,23 @@ class ConversationExporter:
         self.output_dir = output_dir
         self.formatter = MarkdownFormatter()
 
-    def export(self, turns: List[Dict[str, Any]], title: str = "AI Dialogue Log") -> List[str]:
+    def export(self, turns: List[Dict[str, Any]], title: str = "AI Dialogue Log", filename: str = None) -> List[str]:
+        if self.output_dir.lower().endswith(".md") and not filename:
+            filename = os.path.basename(self.output_dir)
+            self.output_dir = os.path.dirname(self.output_dir) or "."
+
         os.makedirs(self.output_dir, exist_ok=True)
         written_files = []
+
+        if filename:
+            custom_path = os.path.join(self.output_dir, filename)
+            with open(custom_path, "w", encoding="utf-8") as f:
+                f.write(f"# 📚 {title} (Complete Log)\n\n")
+                f.write(f"> Total turns: {len(turns)}\n\n")
+                for idx, turn in enumerate(turns, 1):
+                    f.write(self.formatter.format_turn(turn, idx) + "\n")
+            written_files.append(custom_path)
+            return written_files
 
         if not turns:
             readme_path = os.path.join(self.output_dir, "README.md")

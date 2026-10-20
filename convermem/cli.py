@@ -25,9 +25,11 @@ def main():
 @click.option("--topic", default=None, help="Comma-separated keywords to filter turns by topic.")
 @click.option("--days", default=None, type=int, help="Include turns from the last N days.")
 @click.option("--last", default=None, type=int, help="Limit traversal to the N most recent sessions.")
-@click.option("--out", default="./convermem_export", help="Target output directory.")
+@click.option("--session", default=None, help="Filter to a specific session ID (or substring).")
+@click.option("--out", default="./convermem_export", help="Target output directory or .md file path.")
+@click.option("--file", "filename", default=None, help="Optional single Markdown file name (e.g. test1.md).")
 @click.option("--no-redact", is_flag=True, default=False, help="Disable secret and PII auto-redaction.")
-def export_cmd(topic, days, last, out, no_redact):
+def export_cmd(topic, days, last, session, out, filename, no_redact):
     """Exports cross-conversation dialogue turns to structured Markdown."""
     click.echo("🔍 Discovering AI session transcripts...")
     reader = TranscriptReader()
@@ -37,7 +39,9 @@ def export_cmd(topic, days, last, out, no_redact):
         click.echo("⚠️ No session transcripts found in brain directory.")
         return
 
-    if last is not None and last > 0:
+    if session:
+        sessions = [s for s in sessions if session.lower() in s["session_id"].lower()]
+    elif last is not None and last > 0:
         sessions = sessions[:last]
 
     click.echo(f"📂 Scanning {len(sessions)} session(s)...")
@@ -80,7 +84,7 @@ def export_cmd(topic, days, last, out, no_redact):
 
     # Export
     exporter = ConversationExporter(output_dir=out)
-    files = exporter.export(processed_turns, title="AI Conversation Logs")
+    files = exporter.export(processed_turns, title="AI Conversation Logs", filename=filename)
     click.echo(f"✅ Export complete! {len(processed_turns)} turns written to {out}")
     for f in files:
         click.echo(f"   📄 {os.path.basename(f)}")
@@ -95,3 +99,7 @@ def scan_cmd():
         click.echo(f" - {s['session_id']} ({s['path']})")
     if len(sessions) > 10:
         click.echo(f"   ... and {len(sessions) - 10} more.")
+
+if __name__ == "__main__":
+    main()
+

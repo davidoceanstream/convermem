@@ -21,3 +21,7 @@ dev = [
 
 [project.scripts]
 convermem = "convermem.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["convermem*"]
+

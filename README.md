@@ -43,12 +43,24 @@ It solves one of the biggest challenges when working with AI: **lossy context an
 
 ## ⚡ 10-Second Quickstart
 
-### 1. Install
+### 1. One-Click Install & Universal Sync (Recommended)
+Clones and automatically registers the `/convermem` slash command into all your AI assistants (Antigravity, Claude Code, Cursor, OpenCode):
+
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/davidoceanstream/convermem.git
+cd convermem
+powershell -ExecutionPolicy Bypass -File scripts/install.ps1
+```
+
+**macOS / Linux:**
 ```bash
 git clone https://github.com/davidoceanstream/convermem.git
 cd convermem
-pip install -e .
+bash scripts/install.sh
 ```
+
+*(Or manual installation via standard pip: `pip install -e .`)*
 
 ### 2. Run in Terminal (CLI)
 ```bash
@@ -94,8 +106,8 @@ Never worry about leaking secrets to public GitHub repos. ConverMem automaticall
 - **PII:** Phone numbers (international & local) and personal email addresses
 - *Secrets are masked to `[REDACTED_API_KEY]`, keeping your team and code 100% safe.*
 
-### 🧵 3. Timeline Weaving for `/btw` and Side Questions
-Coding assistants often support floating modal questions or `/btw` sub-threads so users don't break the agent's flow. ConverMem finds these transient side questions and weaves them chronologically back into the main conversation at their exact timestamps.
+### 🧹 3. Zero-Noise Dialogue Cleaner
+AI agent transcripts are packed with noisy raw system wrappers (`<ADDITIONAL_METADATA>`, `<SYSTEM_MESSAGE>`, `<USER_SETTINGS_CHANGE>`, raw tool execution logs, and JSON schema payloads). ConverMem strips away this internal clutter, extracting only the pristine, human-readable dialogue between you and the AI while keeping code blocks and technical solutions 100% intact.
 
 ### 🚀 4. Multi-Destination Connectors
 Go beyond saving flat files on your hard drive:

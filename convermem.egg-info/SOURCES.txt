@@ -1,5 +1,13 @@
+LICENSE
+README.md
 pyproject.toml
 convermem/__init__.py
+convermem/cli.py
+convermem/exporter.py
+convermem/filter.py
+convermem/formatter.py
+convermem/privacy.py
+convermem/reader.py
 convermem.egg-info/PKG-INFO
 convermem.egg-info/SOURCES.txt
 convermem.egg-info/dependency_links.txt
@@ -7,3 +15,9 @@ convermem.egg-info/entry_points.txt
 convermem.egg-info/requires.txt
 convermem.egg-info/top_level.txt
 tests/test_basic.py
+tests/test_cli.py
+tests/test_exporter.py
+tests/test_filter.py
+tests/test_formatter.py
+tests/test_privacy.py
+tests/test_reader.py
